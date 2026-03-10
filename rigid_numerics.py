@@ -6,6 +6,8 @@ for rank 3 rigid local systems
 # need sum(z_i for i from 1 to s) = (s-2)n^2 + 2
 
 from itertools import product
+import partitions
+
 
 def list_rigid_dims(s, n, possible):
 
@@ -36,14 +38,30 @@ def print_acceptable_tuples(above, n, possible):
 
     return
 
-def main():
-    print("Rank 3:")
+def list_possible_dims(n):
+    parts = partitions.make_partitions(n)
+    possible = []
+    for a in parts:
+        sum_of_squares = 0
+        for x in a:
+            sum_of_squares += x * x
+        possible.append(sum_of_squares)
+    return possible
 
-    possible_rank3 = [3,5,9]
+def rigid_dims_tester(n):
+    print("Rank", n)
+    possibles = list_possible_dims(n)
+    print(possibles)
     for s in range(3, 10):
-        print(list_rigid_dims(s, 3, possible_rank3))
+        print(list_rigid_dims(s, n, possibles))
 
-    print("Rank 2:")
+
+def main():
+    
+    rigid_dims_tester(4)
+
+
+    '''print("Rank 2:")
 
     possible_rank2 = [4,2]
     for s in range(3,10):
@@ -63,11 +81,15 @@ def main():
         dims = list_rigid_dims(s, 5, possible_rank5)
         print(dims)
         print("s=", s, "len = ", len(dims))
+    '''
 
-    # now we restrict to semisimple systems
+    # Rank 6 is very nonperformant.
+    # Needs some optimizations that I'm too lazy to think about right now
+    '''
+    # now we restrict to semisimple systems 
     # which should be ok because these are dense
     # and we can have flat families go to the non-s.s. cases
-    '''possible_rank6 = [6,8,10,12,14,18,20,26,36]
+    possible_rank6 = [6,8,10,12,14,18,20,26,36]
     print_acceptable_tuples(10, 6, possible_rank6)'''
 
 if __name__ == "__main__":
