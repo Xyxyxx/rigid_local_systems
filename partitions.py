@@ -14,10 +14,15 @@ def make_partitions(n):
     return partitions_of_n
 
 def test():
-    for i in range(5):
-        print(make_partitions(i))
+    for i in range(10):
+        part = make_partitions(i)
+        for p in part:
+            if sum(p) != i:
+                return False
 
-    return
+    return True
 
 if __name__ == "__main__":
-    test()
+    if test():
+        print("All tests passed")
+
