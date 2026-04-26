@@ -51,14 +51,19 @@ def list_possible_dims(n):
 def rigid_dims_tester(n):
     print("Rank", n)
     possibles = list_possible_dims(n)
-    print(possibles)
+    print("Possible dimensions:", possibles)
     for s in range(3, 10):
         print(list_rigid_dims(s, n, possibles))
 
 
 def main():
-    
-    rigid_dims_tester(4)
+
+    print("Enter desired rank:")
+    n = eval(input())
+    rigid_dims_tester(n)
+
+
+    #rigid_dims_tester(3)
 
 
     '''print("Rank 2:")
